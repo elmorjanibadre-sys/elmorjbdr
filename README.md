@@ -1,3 +1,8 @@
+# Projets
+
+- [`radar/`](radar/) : **Souk Radar**, veille e-commerce pour le Maroc (publicités, hooks, boutiques concurrentes, fournisseurs).
+- `mobile/` et `server/` : **Chatly**, messagerie mobile (décrite ci-dessous).
+
 # Chatly
 
 Application de messagerie mobile (Android / iOS) en temps réel, inspirée des

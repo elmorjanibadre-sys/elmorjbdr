@@ -1,0 +1,12 @@
+{
+  "name": "souk-radar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Veille e-commerce pour le marché marocain : publicités, hooks, boutiques concurrentes, fournisseurs",
+  "main": "src/server.js",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning src/server.js",
+    "test": "node --no-warnings=ExperimentalWarning --test"
+  }
+}

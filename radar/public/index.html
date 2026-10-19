@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Souk Radar</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">◎</span> Souk Radar <small>Veille e-commerce Maroc</small></div>
+    <nav id="tabs">
+      <button data-tab="dashboard" class="active">Tableau de bord</button>
+      <button data-tab="ads">Publicités</button>
+      <button data-tab="trends">Hooks &amp; tendances</button>
+      <button data-tab="stores">Boutiques</button>
+      <button data-tab="suppliers">Fournisseurs</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Tableau de bord -->
+    <section id="tab-dashboard" class="tab active">
+      <div class="kpis" id="kpis"></div>
+      <div class="grid2">
+        <div class="card">
+          <h2>Publicités gagnantes</h2>
+          <p class="hint">Actives depuis 7 jours ou plus : l'annonceur continue de payer, donc elles vendent.</p>
+          <div id="dash-winners"></div>
+        </div>
+        <div class="card">
+          <h2>Activité des concurrents</h2>
+          <div id="dash-events"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publicités -->
+    <section id="tab-ads" class="tab">
+      <div class="card">
+        <div class="toolbar">
+          <input id="ads-q" placeholder="Rechercher (produit, page, mot-clé…)" />
+          <select id="ads-hook"><option value="">Tous les hooks</option></select>
+          <select id="ads-lang">
+            <option value="">Toutes les langues</option>
+            <option value="darija">Darija (arabe)</option>
+            <option value="darija_latin">Darija (latin)</option>
+            <option value="francais">Français</option>
+            <option value="arabe">Arabe</option>
+            <option value="anglais">Anglais</option>
+          </select>
+          <label class="check"><input type="checkbox" id="ads-winners" /> Gagnantes seulement</label>
+        </div>
+        <div id="ads-list" class="ads"></div>
+      </div>
+      <div class="grid2">
+        <form class="card" id="ad-form">
+          <h2>Ajouter une publicité</h2>
+          <input name="page_name" placeholder="Page / annonceur" />
+          <select name="platform">
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="snapchat">Snapchat</option>
+          </select>
+          <textarea name="text" rows="3" placeholder="Texte de la publicité"></textarea>
+          <textarea name="transcript" rows="2" placeholder="Transcription des 3 premières secondes de la vidéo (optionnel)"></textarea>
+          <input name="landing_url" placeholder="Lien de la boutique / page produit" />
+          <input name="video_url" placeholder="Lien de la vidéo (optionnel)" />
+          <label>Date de début <input type="date" name="started_at" /></label>
+          <button type="submit">Ajouter et analyser</button>
+        </form>
+        <div class="card">
+          <h2>Import en masse</h2>
+          <p class="hint">Colle un tableau JSON : <code>[{"id","page_name","text","transcript","platform","landing_url","started_at"}]</code></p>
+          <textarea id="import-json" rows="6" placeholder='[{"id":"123","page_name":"…","text":"…","started_at":"2026-10-01"}]'></textarea>
+          <button id="import-btn">Importer</button>
+          <h3>Bibliothèque publicitaire Meta</h3>
+          <p class="hint">Nécessite <code>META_ACCESS_TOKEN</code>. Hors UE, Meta ne fournit que les pubs politiques : voir README.</p>
+          <div class="row"><input id="meta-terms" placeholder="Mots-clés" /><button id="meta-btn">Synchroniser</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hooks & tendances -->
+    <section id="tab-trends" class="tab">
+      <div class="grid2">
+        <div class="card">
+          <h2>Analyser un hook</h2>
+          <textarea id="hook-text" rows="4" placeholder="Colle le texte ou la transcription d'une vidéo…"></textarea>
+          <button id="hook-btn">Analyser</button>
+          <div id="hook-result"></div>
+        </div>
+        <div class="card">
+          <h2>Types de hooks dominants <small>(7 derniers jours)</small></h2>
+          <div id="trend-hooks"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Mots-clés en hausse</h2>
+        <p class="hint">Comparaison des publicités lancées ces 7 derniers jours avec les 7 jours précédents.</p>
+        <div id="trend-keywords"></div>
+      </div>
+    </section>
+
+    <!-- Boutiques -->
+    <section id="tab-stores" class="tab">
+      <form class="card row" id="store-form">
+        <input name="url" placeholder="URL de la boutique concurrente (ex. maboutique.ma)" required />
+        <input name="name" placeholder="Nom (optionnel)" />
+        <button type="submit">Suivre</button>
+      </form>
+      <div id="stores-list"></div>
+      <div id="store-detail"></div>
+    </section>
+
+    <!-- Fournisseurs -->
+    <section id="tab-suppliers" class="tab">
+      <div class="grid2">
+        <form class="card" id="supplier-form">
+          <h2>Ajouter un fournisseur</h2>
+          <input name="name" placeholder="Nom" required />
+          <select name="type">
+            <option value="grossiste_local">Grossiste local</option>
+            <option value="fabricant_local">Fabricant marocain</option>
+            <option value="import_chine">Import Chine</option>
+            <option value="import_turquie">Import Turquie</option>
+            <option value="dropshipping">Dropshipping local</option>
+          </select>
+          <input name="city" placeholder="Ville (Casablanca, Derb Omar, Tanger…)" />
+          <input name="category" placeholder="Catégorie (beauté, maison, mode…)" />
+          <input name="contact" placeholder="Téléphone / WhatsApp / e-mail" />
+          <input name="url" placeholder="Site ou lien" />
+          <input name="moq" placeholder="Quantité minimum (MOQ)" />
+          <textarea name="notes" rows="2" placeholder="Notes (prix, délais, qualité…)"></textarea>
+          <button type="submit">Enregistrer</button>
+        </form>
+        <div class="card">
+          <h2>Rechercher un produit chez les fournisseurs</h2>
+          <div class="row"><input id="sourcing-q" placeholder="Produit (ex. lampe LED, sérum)" /><button id="sourcing-btn">Chercher</button></div>
+          <div id="sourcing-links" class="links"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="toolbar"><input id="suppliers-q" placeholder="Filtrer mes fournisseurs" /></div>
+        <div id="suppliers-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
