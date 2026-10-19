@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lancer Souk Radar</title>
+<style>
+  :root {
+    --bg: #f5f3ee; --surface: #fff; --text: #1d1d1b; --muted: #6f6c66; --border: #e4e0d8;
+    --primary: #b4372f; --primary-soft: #f6e3e1; --code-bg: #1f1e1c; --code-text: #f1efe9;
+    --warn-soft: #fbefd6; --warn: #7a4c05;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171614; --surface: #22201e; --text: #ecebe7; --muted: #a39f97; --border: #3a3733;
+      --primary: #e0675d; --primary-soft: #3a2422; --code-bg: #0f0e0d; --warn-soft: #3a2f17; --warn: #f0c46b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  h1 span { color: var(--primary); }
+  .lead { color: var(--muted); margin: 0 0 28px; }
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 16px; }
+  .step h2 { font-size: 18px; margin: 0 0 10px; display: flex; align-items: center; gap: 10px; }
+  .num { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--primary);
+    color: #fff; font-size: 15px; display: grid; place-items: center; }
+  p, ul { margin: 8px 0; }
+  ul { padding-left: 20px; }
+  .cmd { position: relative; background: var(--code-bg); color: var(--code-text); border-radius: 8px;
+    padding: 12px 84px 12px 14px; margin: 10px 0; font: 14px/1.6 Consolas, "Cascadia Mono", monospace;
+    white-space: pre-wrap; word-break: break-all; }
+  .copy { position: absolute; top: 8px; right: 8px; background: #3a3835; color: #fff; border: 0;
+    border-radius: 6px; padding: 4px 10px; font-size: 13px; cursor: pointer; }
+  .copy:hover { background: var(--primary); }
+  .out { background: var(--primary-soft); color: var(--text); border-radius: 8px; padding: 10px 14px;
+    font: 14px/1.5 Consolas, monospace; word-break: break-all; }
+  .note { background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 10px 14px; margin-top: 10px; }
+  a { color: var(--primary); }
+  kbd { border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px;
+    font-size: 14px; background: var(--bg); }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 10px 6px; border-top: 1px solid var(--border); vertical-align: top; }
+  td:first-child { font-weight: 600; width: 40%; }
+</style>
+</head>
+<body>
+<main>
+  <h1><span>◎</span> Lancer Souk Radar sur Windows</h1>
+  <p class="lead">Guide pas à pas avec l'invite de commandes (cmd).</p>
+
+  <section class="step">
+    <h2><span class="num">1</span> Installer les outils (une seule fois)</h2>
+    <ul>
+      <li><strong>Node.js</strong> version 22.13 ou plus récente : version « LTS » sur
+        <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a></li>
+      <li><strong>Git</strong> : <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a></li>
+    </ul>
+    <p>Ferme cmd et rouvre-le, puis vérifie l'installation :</p>
+    <div class="cmd">node -v
+git --version</div>
+    <p><code>node -v</code> doit afficher <strong>v22.13</strong> ou plus.</p>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">2</span> Télécharger le projet</h2>
+    <div class="cmd">cd %USERPROFILE%\Desktop
+git clone -b claude/blissful-fermi-hqx85f https://github.com/elmorjanibadre-sys/elmorjbdr.git
+cd elmorjbdr\radar</div>
+    <p class="note">Si GitHub demande de te connecter, utilise ton compte GitHub (le dépôt est peut-être privé).</p>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">3</span> Lancer Souk Radar</h2>
+    <div class="cmd">npm start</div>
+    <p>Ce message doit apparaître :</p>
+    <div class="out">Souk Radar : http://localhost:4000 (scan des boutiques toutes les 60 min)</div>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">4</span> Ouvrir l'outil</h2>
+    <p>Dans ton navigateur (Chrome, Edge…), va sur
+      <a href="http://localhost:4000" target="_blank" rel="noopener"><strong>http://localhost:4000</strong></a></p>
+    <ul>
+      <li>Laisse la fenêtre cmd ouverte tant que tu utilises l'outil.</li>
+      <li>Pour l'arrêter : <kbd>Ctrl</kbd> + <kbd>C</kbd> dans cmd.</li>
+    </ul>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">5</span> Les fois suivantes</h2>
+    <div class="cmd">cd %USERPROFILE%\Desktop\elmorjbdr\radar
+npm start</div>
+    <p>Pour récupérer la dernière version du projet, dans le dossier <code>elmorjbdr</code> :</p>
+    <div class="cmd">git pull</div>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">?</span> En cas de problème</h2>
+    <table>
+      <tr><td>« node n'est pas reconnu… »</td>
+        <td>Node.js n'est pas installé, ou cmd n'a pas été rouvert après l'installation.</td></tr>
+      <tr><td>Le port 4000 est déjà utilisé</td>
+        <td>Lance sur un autre port, puis ouvre http://localhost:5000
+          <div class="cmd">set PORT=5000
+npm start</div></td></tr>
+      <tr><td>Autre erreur</td><td>Copie le message d'erreur exact et envoie-le.</td></tr>
+    </table>
+  </section>
+</main>
+<script>
+  document.querySelectorAll('.cmd').forEach((block) => {
+    const text = block.textContent;
+    const btn = document.createElement('button');
+    btn.className = 'copy';
+    btn.textContent = 'Copier';
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'Copié ✓';
+      } catch {
+        btn.textContent = 'Sélectionne le texte';
+      }
+      setTimeout(() => (btn.textContent = 'Copier'), 1500);
+    });
+    block.appendChild(btn);
+  });
+</script>
+</body>
+</html>
