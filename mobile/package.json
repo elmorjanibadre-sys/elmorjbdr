@@ -6,7 +6,10 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios"
+    "ios": "expo start --ios",
+    "build:ios:simulator": "eas build --platform ios --profile simulator",
+    "build:ios": "eas build --platform ios --profile preview",
+    "submit:ios": "eas submit --platform ios --profile production"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",

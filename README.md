@@ -47,6 +47,36 @@ Sur l'émulateur Android, utilise `http://10.0.2.2:3000`.
 Pour tester une conversation, connecte-toi avec deux noms différents sur deux
 appareils (ou un téléphone + un émulateur).
 
+## Version iOS
+
+L'application est la même pour Android et iOS (Expo / React Native).
+
+### Option 1 : tester tout de suite sur iPhone (gratuit)
+
+1. Installe **Expo Go** depuis l'App Store.
+2. Lance le serveur, puis `cd mobile && EXPO_PUBLIC_SERVER_URL=http://<IP-de-ton-PC>:3000 npm start`.
+3. Scanne le QR code avec l'appareil photo de l'iPhone.
+4. Accepte l'accès au « réseau local » quand iOS le demande.
+
+### Option 2 : construire une vraie app iOS (.ipa) avec EAS
+
+Pas besoin de Mac : la compilation se fait dans le cloud d'Expo.
+
+```bash
+npm install -g eas-cli
+cd mobile
+eas login                      # compte Expo gratuit
+npm run build:ios:simulator    # build pour le simulateur iOS (pas de compte Apple requis)
+npm run build:ios              # build installable sur iPhone (compte Apple Developer requis, 99 $/an)
+npm run submit:ios             # envoi vers TestFlight / App Store
+```
+
+Pour une build installable, définis l'adresse du serveur avec une variable
+d'environnement EAS (`EXPO_PUBLIC_SERVER_URL`), de préférence en **HTTPS** :
+iOS bloque le HTTP non chiffré, sauf sur le réseau local.
+
+Identifiant de l'app : `com.elmorjbdr.chatly` (modifiable dans `mobile/app.json`).
+
 ## Limites actuelles / pistes
 
 - Les données sont en mémoire : elles disparaissent au redémarrage du serveur
