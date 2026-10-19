@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Chatly",
+    "slug": "chatly",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "android": { "softwareKeyboardLayoutMode": "resize" },
+    "ios": { "supportsTablet": false }
+  }
+}
